@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+import numpy as np
+import os
+import sys
+import argparse
+import warnings
+
+from FAST import motility
+
+#Suppress all the warnings
+warnings.filterwarnings("ignore")
+
+#Definition of the program
+usage            = ['%(prog)s -d [DIRECTORY]',
+                    '------------------------------------------------------------------------',
+                    'stack2tifs: Utility function to convert stack files to tifs in a folder',
+                    '09/02/2013',
+                    'Tural Aksel',
+                    '',
+                    'For bugs and other problems please contact turalaksel@gmail.com',
+                    '------------------------------------------------------------------------'
+                    ]
+
+#Create the parser
+parser = argparse.ArgumentParser(description='',usage='\n'.join(usage)) 
+parser.add_argument('-d',help='top directory of the stack files to be converted to tif files')
+parser.add_argument('-s',help='Lower bound for the size(Mbytes) of tif files to be converted',default=6,type=float)
+parser.add_argument('-f',help='Frame rate for the movies',default=1,type=float)
+args = parser.parse_args()
+args_dict = vars(args)
+parser.print_help()
+
+
+#Get the argument
+main_dir   = args_dict['d']
+min_size   = args_dict['s']
+frame_rate = args_dict['f'] 
+
+#Check if the directory exists
+if main_dir == None or not os.path.isdir(main_dir):
+    sys.exit("Directory doesn't exist. Program is exiting.")
+
+'''
+Recurse through each data directory
+'''
+for root, subFolders, files in os.walk(main_dir):
+    if len(subFolders) == 0:
+        tif_files = filter(lambda f: os.path.getsize(root+'/'+f)*1E-6 > min_size and os.path.splitext(f)[1] == '.tif', files)
+        for tif_file in tif_files:
+            motility.stack_to_tiffs(root+'/'+tif_file,frame_rate)
