@@ -44,24 +44,25 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - **fast** only analyzes movie tif files recorded using  [micro-manager](https://www.micro-manager.org/). For movies, recorded using other software, first save the movie as tiff stacks and convert the stacks to micro-manager output format using **stack2tiffs**.
    
-     ```     stack2tiffs -d DIRECTORY -f FRAMERATE -s SIZELOWERBOUND
+     ```
+    stack2tiffs -d DIRECTORY -f FRAMERATE -s SIZELOWERBOUND
      ```
     
-    - **DIRECTORY** is the top directory in which tiff stacks are stored.
-    - **FRAMERATE** is the frame rate of the movies in frame per second **(Default: 1)**. Process movies with different frame rates separately.
-    - **SIZELOWERBOUND** is the lower bound for the size (Mbytes) of the tiff stacks to be converted into individual tiffs **(Default: 6)**. Only tiffstacks bigger in size than SIZELOWERBOUND are processed.
+- **DIRECTORY** is the top directory in which tiff stacks are stored.
+- **FRAMERATE** is the frame rate of the movies in frame per second **(Default: 1)**. Process movies with different frame rates separately.
+- **SIZELOWERBOUND** is the lower bound for the size (Mbytes) of the tiff stacks to be converted into individual tiffs **(Default: 6)**. Only tiffstacks bigger in size than SIZELOWERBOUND are processed.
 
 ##Analysis of movies using FAST##
+
 - Although not necessary, it is recommended to organize the movies to be analyzed in a hierarchical order.
-   
-     - LEVEL1 (e.g. date)
-        - LEVEL2 (e.g. slide number)
+   - LEVEL1 (e.g. date)
+       - LEVEL2 (e.g. slide number)
             - LEVEL3 (e.g. experimental condition)
                 - LEVEL4 (e.g. replicates)   
  
 - All **fast** needs is the top directory the movie folders are located at.
-
-    ```    fast -d LEVEL1
+    ```    
+    fast -d LEVEL1
     ```
 
 - **FAST** first finds the lowest LEVEL directories that have movie folders under **LEVEL1**, and analyzes them in order. The lowest level movies (folders) under the same directory are treated as replicates. The results from replicates are combined to determine the average results. Therefore, it is important that the replicates have identical frame rates. Please check example movie files in the **examples/unloaded_motility** directory.
@@ -125,21 +126,21 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 - To run **lima**, on a set of movies processed by **fast**, first go to outputs directory where the results for the complete data set are stored. For example, if user is in ```examples/loaded_motility```, enter in terminal ```cd outputs``` to change directory to outputs.
 
 - To perform a loaded motility analysis for a **FOLDER** in ```outputs``` directory, enter in terminal,
-
     ```lima -d FOLDER```
 - Analysis results will be stored in ```FOLDER/combined/lima```.
 
 - For the analysis of an example data set, check ```examples/loaded_motility```.
     - First, analyze the movies:
-    ```fast -r -d 032714```
+        ```fast -r -d 032714```
     - Move to outputs folder:
-    ```cd outputs```
+        ```cd outputs```
     - Process the only directory in **outputs**: 
-    ```lima -d 032714__pt_none__n_5__ymax_1500__p_5__fx_none```
+        ```lima -d 032714__pt_none__n_5__ymax_1500__p_5__fx_none```
     - Check the analysis results under
-    ```032714__pt_none__n_5__ymax_1500__p_5__fx_none/combined/lima```. 
-   
+        ```032714__pt_none__n_5__ymax_1500__p_5__fx_none/combined/lima```. 
+
 - For different analysis options, enter ```lima -h```.
 
 ##FAQ##
+
 - For questions and to report bugs, please contact me by turalaksel[at]gmail.com.
