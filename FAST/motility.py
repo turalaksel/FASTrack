@@ -25,7 +25,7 @@ from scipy.misc import imsave
 from scipy import stats
 
 from skimage import img_as_uint
-from skimage.filter import thresholding,rank,threshold_otsu
+from skimage.filters import thresholding,rank,threshold_otsu
 from skimage.morphology import disk, square, rectangle, skeletonize, dilation
 from skimage.morphology.watershed import watershed
 from skimage.io._plugins.freeimage_plugin import read_multipage
@@ -1042,7 +1042,7 @@ class Motility:
         cwd = os.getcwd()
         os.chdir(self.directory)
         
-        avicommand = "avconv -y -r 1 -i skeletons_%03d.png -r 1 filament_tracks.avi"
+        avicommand = "ffmpeg -y -r 1 -i skeletons_%03d.png -r 1 filament_tracks.avi"
         os.system(avicommand)
         
         #Copy the movie to output directory

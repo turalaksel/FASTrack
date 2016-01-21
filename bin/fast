@@ -293,7 +293,12 @@ for top_root in sorted_top_roots:
         new_Frame.directory  = final_folder
         new_Frame.header     = 'img_000000'
         new_Frame.tail       = tail_tif
-        file_exists     = new_Frame.read_frame(0)
+        file_exists          = new_Frame.read_frame(0)
+        
+        #Frame width and height
+        frame_width          = new_Frame.width
+        frame_height         = new_Frame.height
+
         if not file_exists:
             picture_quality = 'good'
         else:
@@ -304,10 +309,6 @@ for top_root in sorted_top_roots:
             print 'Bad picture quality in %s'%(root)
             continue
         
-        #Frame width and height
-        frame_width          = new_Frame.width
-        frame_height         = new_Frame.height
-
         #Output filenames
         file_header = '_'.join(root.split('/'))
         
@@ -355,7 +356,7 @@ for top_root in sorted_top_roots:
             new_motility.force_analysis = force_analysis
             new_motility.width          = frame_width
             new_motility.height         = frame_height
-
+            
             #If links are already constructed read frame links and skip the next parts
             if not new_motility.read_frame_links():
                 new_motility.load_frame1(0)
