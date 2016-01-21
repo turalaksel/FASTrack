@@ -6,9 +6,9 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 **Tural Aksel**
 
-**Last updated on 06/13/2015**
+**Last updated on 2016-01-21**
 
-##Installation on Ubuntu 14.04##
+##Installation on Ubuntu 15.10##
 
 - **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
     
@@ -39,63 +39,6 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
     ./install.sh
     ```
 - After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
-
-##Installation on Mac OS X Yosemite##
-
-- **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
-    
-    ```
-    cd /usr/local/bin
-    sudo rm -f fast lima stack2tifs
-    cd ~/anaconda/lib/python2.7/site-packages
-    rm -f motility.py plotparams.py
-    ```
-
-- MacOS X comes with python installed, however I personally prefer the [Anaconda](http://continuum.io/downloads) distribution. Download the 64 bit installer for Python2.7 and install it.
-
-- FAST depends on some functions from [FreeImage](http://freeimage.sourceforge.net/) library. To install FreeImage, first install [macports](https://www.macports.org/). 
-
-- Download the package for [Mac OS X 10.10 Yosemite](https://distfiles.macports.org/MacPorts/MacPorts-2.3.3-10.10-Yosemite.pkg).
-
-- After installation of macports, install free image on terminal.
-
-    ``` 
-    sudo port install freeimage
-    ```
-- Install python package for openCV on terminal.
-
-    ``` 
-    conda install opencv
-    ```
-- Numpy package will be downgraded. Install again the updated version of numpy on terminal.
-
-    ```
-    conda install numpy
-    ```
-- Move **FAST_mac** directory to the desired location. After you move the folder, on terminal change move to FAST_mac and run the installation script. 
-    
-    ```
-    chmod +x install.sh
-    ./install.sh
-    ```
-
-- After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
-
-###Installation instructions for generating tracking movies on Mac OSX###
-
-- To create filament tracking movies as a visual report for quality of filament tracking, two extra packages need to be installed.
-
-- Install ImageMagick by downloading and installing [ImageMagick package](http://cactuslab.com/imagemagick/assets/ImageMagick-6.9.1-0.pkg.zip).
-
-- Install ffmpeg by downloading the binaries for your system from [ffmpeg page](http://ffmpegmac.net/).
-
-- After downloading and opening the zip file, move the contents to ```/usr/local/bin``` on a terminal.
-
-- First ```cd``` to the package directory and move contents to destination.
-    
-    ```
-    sudo mv ffmpeg ffprobe ffserver /usr/local/bin
-    ```
 
 ##Preparation of movie files##
 
