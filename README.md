@@ -4,6 +4,8 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 [1]: http://www.cell.com/cell-reports/abstract/S2211-1247(15)00381-2
 
+**examples** folder containing all example movies can be downloaded from https://goo.gl/vKGYWL
+
 **Tural Aksel**
 
 **Last updated on 2016-01-21**
