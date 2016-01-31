@@ -103,6 +103,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
     - ```-px PIXEL```: Pixel size in nm **(Default:80.65)**.  
     - ```-ymax YMAX```: Maximum velocity in nm/s for the scatter plot **(Default:1500)**.
     - ```-xmax XMAX```: Maximum filament length in nm for the scatter plot **(Default:10000)**.
+    - ```-mv MV```: Maximum allowed distance in nm between adjacent frames for a filament (Default:2016.25)
 
 - To estimate maximum velocities TOP5% and PLATEAU, I recommend the following parameter set.
     - ``` fast -n 5 -p 10 -pt 20 -d LEVEL1```
