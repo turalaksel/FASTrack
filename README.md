@@ -36,8 +36,10 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
     ```
 
 - Move **FAST_linux** directory to the desired location. After you move the folder, on terminal change move to FAST_linux and run the installation script.     
+    
     ```
     chmod +x install.sh
+    
     ./install.sh
     ```
 - After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
@@ -78,6 +80,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
     - ```-px PIXEL```: Pixel size in nm **(Default:80.65)**.  
     - ```-ymax YMAX```: Maximum velocity in nm/s for the scatter plot **(Default:1500)**.
     - ```-xmax XMAX```: Maximum filament length in nm for the scatter plot **(Default:10000)**.
+    - ```-mv MV```: Maximum allowed distance in nm between adjacent frames for a filament (Default:2016.25)
 
 - To estimate maximum velocities TOP5% and PLATEAU, I recommend the following parameter set.
     - ``` fast -n 5 -p 10 -pt 20 -d LEVEL1```
