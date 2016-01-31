@@ -49,6 +49,7 @@ parser.add_argument('-ymax' ,default = 1500,  type=int,   help='maximum velocity
 parser.add_argument('-xmax' ,default = 10000, type=int,   help='maximum length for the plot in nm (Default:10000)')
 parser.add_argument('-cl'   ,default = 'b',   type=str,   help='color for maximum velocity points (Default:blue)')
 parser.add_argument('-fx'   ,default = 'none', choices = ['none','exp','uyeda'], type=str, help='function to be fitted to maximum velocity data')
+parser.add_argument('-md'   ,default = 25,    type=int,   help='maximum allowed distance in pixels between adjacent frames for a filament (Default:25)')
 
 args = parser.parse_args()
 args_dict = vars(args)
@@ -71,6 +72,7 @@ plot_xmax            = args_dict['xmax']
 maxvel_color         = args_dict['cl']
 fit_function         = args_dict['fx']
 pixel_size           = args_dict['px']
+max_px               = args_dict['md']
 
 #Force analysis string value - for the analysis file
 force_analysis_str = 'False'
@@ -351,6 +353,7 @@ for top_root in sorted_top_roots:
             #Create the Motility object
             new_motility                = motility.Motility()
             new_motility.dx             = 1.0*pixel_size
+            new_motility.max_velocity   = max_px
             new_motility.num_frames     = len(frame_nos)
             new_motility.directory      = final_folder
             new_motility.force_analysis = force_analysis
@@ -432,6 +435,7 @@ for top_root in sorted_top_roots:
     combined_motility.max_len_vel  = combined_max_len_vel
     combined_motility.num_frames   = number_of_frames
     combined_motility.dx           = 1.0*pixel_size
+    combined_motility.max_velocity = max_px
     
     #Total number of points
     total_num_points = len(combined_full_len_vel[:,0])
