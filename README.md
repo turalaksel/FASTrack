@@ -57,7 +57,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - Install ImageMagick by downloading and installing [ImageMagick package](http://cactuslab.com/imagemagick/assets/ImageMagick-6.9.1-0.pkg.zip).
 
-- Install ffmpeg version 2.7.2 by downloading the binaries for your system from [ffmpeg page](http://ffmpegmac.net/).
+- Install ffmpeg version 2.7.2 by downloading the binaries for your system from [ffmpeg page](http://ffmpegmac.net/Archive/).
 
 - After downloading and opening the zip file, move the contents to ```/usr/local/bin``` on a terminal.
 
