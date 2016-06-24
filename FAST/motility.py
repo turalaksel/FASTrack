@@ -449,12 +449,15 @@ class Motility:
         if not os.path.isfile(self.directory+'/paths_2D.png'):
             return
 
+        #Filament size ratio
+        ratio = self.width/1002.0
+
         for i in range(len(self.frame_links)):
             #Start with a frame
             new_frame = Frame()
             
             #Prepare the processed images
-            new_frame.img_skeletons  = np.zeros((new_frame.width,new_frame.height),dtype=np.bool)
+            new_frame.img_skeletons  = np.zeros((self.width,self.height),dtype=np.bool)
             for link in self.frame_links[i]:
                 new_frame.img_skeletons[link.filament1_contour[:,0],link.filament1_contour[:,1]] = True
         
@@ -468,14 +471,14 @@ class Motility:
             py.imshow(new_frame.img_skeletons,cmap=cm.gray,interpolation='nearest',alpha=1.0)
             
             #Plot velocities and movement direction on skeleton images
-            arrow_length = 1.0
+            arrow_length = ratio*1.0
             for link in self.frame_links[i]:
                 velocity = link.instant_velocity
                 mp_1     = link.filament1_midpoint
                 mp_2     = link.filament2_midpoint
                 mp_diff  = mp_2 - mp_1
                 
-                py.arrow(mp_1[1],mp_1[0],arrow_length*mp_diff[1],arrow_length*mp_diff[0],color='r',head_width=20,head_length=30,alpha=1.0)
+                py.arrow(mp_1[1],mp_1[0],arrow_length*mp_diff[1],arrow_length*mp_diff[0],color='r',head_width=ratio*20,head_length=ratio*30,alpha=1.0)
                 py.text(mp_1[1],mp_1[0],"%.f"%(velocity),fontsize=10,color='k',alpha=1.0)
             
             #Change x,y-ticks to um scale
@@ -727,6 +730,10 @@ class Motility:
         '''
         Write path velocities and the image
         '''
+        
+        #Filament size ratio
+        ratio = self.width/1002.0
+
         #Path data
         self.path_data  = []
         self.path_stats = []
@@ -780,10 +787,10 @@ class Motility:
                 
                 #Plot the arrows connecting path
                 py.figure(2000)
-                py.arrow(mp_x2,mp_y2,mp_x1-mp_x2,mp_y1-mp_y2,color=path_colors[i],head_width=5,head_length=10,alpha=1.0)
+                py.arrow(mp_x2,mp_y2,mp_x1-mp_x2,mp_y1-mp_y2,color=path_colors[i],head_width=ratio*5,head_length=ratio*10,alpha=1.0)
                 
                 py.figure(2001)
-                py.arrow(mp_x2,mp_y2,mp_x1-mp_x2,mp_y1-mp_y2,color=path_colors[i],head_width=5,head_length=10,alpha=1.0)
+                py.arrow(mp_x2,mp_y2,mp_x1-mp_x2,mp_y1-mp_y2,color=path_colors[i],head_width=ratio*5,head_length=ratio*10,alpha=1.0)
             
             #Write mean velocity for the path
             py.figure(2001)
