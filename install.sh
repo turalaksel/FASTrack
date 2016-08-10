@@ -14,3 +14,11 @@ echo -e "\n#Adding FAST_v1.0/bin directory to PATH\nexport PATH=\"${PWD}/bin:\$P
 echo -e "\n#Adding FAST_v1.0 to PYTHONPATH\nexport PYTHONPATH=\"${PWD}:\$PYTHONPATH\"\n" >> ~/.bashrc
 
 chmod +x bin/*
+
+if [ -f ~/.bash_profile ] 
+then
+	echo -e "\nsource ~/.bashrc\n" >> ~/.bash_profile
+elif [ -f ~/.profile ] 
+then
+	echo -e "\nsource ~/.bashrc\n" >> ~/.profile
+fi
