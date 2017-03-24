@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 usage            = ['%(prog)s -d [DIRECTORY]',
                     '------------------------------------------------------------------------',
                     'FAST v1.0: Fast Actin Filament Spud Trekker',
-                    '05/15/2015',
+                    '03/16/2017',
                     'Tural Aksel',
                     '',
                     'FAST provides fast and accurate analysis of actin gliding assay movies.',
@@ -50,6 +50,8 @@ parser.add_argument('-xmax' ,default = 10000, type=int,   help='maximum length f
 parser.add_argument('-cl'   ,default = 'b',   type=str,   help='color for maximum velocity points (Default:blue)')
 parser.add_argument('-fx'   ,default = 'none', choices = ['none','exp','uyeda'], type=str, help='function to be fitted to maximum velocity data')
 parser.add_argument('-mv'   ,default = 2016.25,    type=float,   help='maximum allowed distance in nm between adjacent frames for a filament (Default:2016.25)')
+
+parser.add_argument('-v'    ,action  = 'store_true'  ,default=False,  help='verbose output for debugging')
 
 args = parser.parse_args()
 args_dict = vars(args)

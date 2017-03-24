@@ -25,7 +25,7 @@ from scipy.misc import imsave
 from scipy import stats
 
 from skimage import img_as_uint
-from skimage.filters import thresholding,rank,threshold_otsu
+from skimage.filters import thresholding,rank,threshold_otsu,gaussian_filter
 from skimage.morphology import disk, square, rectangle, skeletonize, dilation
 from skimage.morphology.watershed import watershed
 from skimage.io._plugins.freeimage_plugin import read_multipage
@@ -1084,6 +1084,8 @@ class Motility:
         if not self.frame.read_frame(num_frame):
             sys.exit('File not found!')
         
+        self.frame.low_pass_filter()
+
         self.frame.entropy_clusters()
    
         self.frame.filter_islands()
@@ -1761,7 +1763,12 @@ class Frame:
             return 'good'
         else:
             return 'bad'
-        
+    
+    def low_pass_filter(self,sigma=2):
+        '''
+        Low pass filter to remove high-frequency noise
+        '''
+        self.img = gaussian_filter(self.img,sigma=sigma)
         
     def entropy_clusters(self):
         '''
