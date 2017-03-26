@@ -249,8 +249,8 @@ class Motility:
         self.frame2           = None  #Second frame
         self.frame_links      = []    #Container for the frame links
         
-        self.min_velocity     = 1     #Minimum velocity of the filament in pixels (Default:2)
-        self.max_velocity     = 25    #Maximum velocity of the filament in pixels (Default:15)
+        self.min_velocity     = 80    #Minimum average path velocity of the filament in nm/s (Default:80 nm/s)
+        self.max_velocity     = 25    #Maximum velocity of the filament in pixels/frame (Default:25)
         self.min_fil_length   = 0     #Minimum filament length
         self.max_fil_length   = 125   #Maximum filament length
         self.max_fil_width    = 25    #Maximum filament width
@@ -557,11 +557,12 @@ class Motility:
                 continue
             
             #Check if the filament has moved or not
-            mp_diff = path.links[-1].filament1_midpoint - path.links[0].filament2_midpoint
-            dist    = np.sqrt(np.sum(mp_diff**2))
+            mp_diff   = path.links[-1].filament1_midpoint - path.links[0].filament2_midpoint
+            time_diff = np.fabs(path.links[-1].filament1_time - path.links[0].filament2_time) 
+            dist      = np.sqrt(np.sum(mp_diff**2))
             
             #Determine whether a filament is stuck
-            if dist < len(path.links)*self.min_velocity:
+            if self.dx*dist/time_diff < len(path.links)*self.min_velocity:
                 path.stuck        = True
             
             #Determine filament length and velocities in nm and nm/s units

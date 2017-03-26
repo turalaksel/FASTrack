@@ -25,7 +25,7 @@ warnings.filterwarnings("ignore")
 usage            = ['%(prog)s -d [DIRECTORY]',
                     '------------------------------------------------------------------------',
                     'FAST v1.0: Fast Actin Filament Spud Trekker',
-                    '03/16/2017',
+                    '03/26/2017',
                     'Tural Aksel',
                     '',
                     'FAST provides fast and accurate analysis of actin gliding assay movies.',
@@ -40,16 +40,21 @@ parser.add_argument('-f'    ,action  = 'store_true'  ,default=False, help='force
 parser.add_argument('-r'    ,action  = 'store_true'  ,default=False, help='recalculate instantaneous velocities from saved filament files')
 parser.add_argument('-m'    ,action  = 'store_true'  ,default=False, help='make filament tracking movie')
 
-parser.add_argument('-p'    ,default = 5,     type=int,   help='minimum length for the paths to be analyzed (Default:5)')
-parser.add_argument('-n'    ,default = 5,     type=int,   help='number of consecutive frames for averaging (Default:5)')
+parser.add_argument('-p'    ,default = 5,       type=int,   help='minimum length for the paths to be analyzed (Default:5)')
+parser.add_argument('-n'    ,default = 5,       type=int,   help='number of consecutive frames for averaging (Default:5)')
 
-parser.add_argument('-pt'   ,default = 500,   type=int,   help='percent tolerance (Default:none)')
-parser.add_argument('-px'   ,default = 80.65, type=float, help='pixel size in nm (Default:80.65 nm)')
-parser.add_argument('-ymax' ,default = 1500,  type=int,   help='maximum velocity for the plot in nm/s (Default:1500)')
-parser.add_argument('-xmax' ,default = 10000, type=int,   help='maximum length for the plot in nm (Default:10000)')
-parser.add_argument('-cl'   ,default = 'b',   type=str,   help='color for maximum velocity points (Default:blue)')
-parser.add_argument('-fx'   ,default = 'none', choices = ['none','exp','uyeda'], type=str, help='function to be fitted to maximum velocity data')
-parser.add_argument('-mv'   ,default = 2016.25,    type=float,   help='maximum allowed distance in nm between adjacent frames for a filament (Default:2016.25)')
+parser.add_argument('-pt'   ,default = 500,     type=int,   help='percent tolerance (Default:none)')
+parser.add_argument('-px'   ,default = 80.65,   type=float, help='pixel size in nm (Default:80.65 nm)')
+parser.add_argument('-ymax' ,default = 1500,    type=int,   help='maximum velocity for the plot in nm/s (Default:1500)')
+parser.add_argument('-xmax' ,default = 10000,   type=int,   help='maximum length for the plot in nm (Default:10000)')
+parser.add_argument('-cl'   ,default = 'b',     type=str,   help='color for maximum velocity points (Default:blue)')
+parser.add_argument('-fx'   ,default = 'none',  choices = ['none','exp','uyeda'], type=str, help='function to be fitted to maximum velocity data')
+parser.add_argument('-maxd' ,default = 2016.25, type=float, help='maximum allowed distance in nm between adjacent frames for a filament (Default:2016.25 nm)')
+parser.add_argument('-minv' ,default = 80,      type=float, help='minimum average path velocity for a filament to be classified as stuck (Default:80 nm/s)')
+
+parser.add_argument('-oscore'   ,default = 0.4, type=float, help='overlap score cutoff value to make the connections between filaments - advanced option (Default:0.4)')
+parser.add_argument('-lascore'  ,default = 1.0, type=float, help='log-area score cutoff value to make the connections between filaments - advanced option (Default:1.0)')
+parser.add_argument('-dlascore' ,default = 0.5, type=float, help='difference-log-area score cutoff value to make the connections between filaments - advanced option (Default:0.5)')
 
 parser.add_argument('-v'    ,action  = 'store_true'  ,default=False,  help='verbose output for debugging')
 
@@ -74,7 +79,14 @@ plot_xmax            = args_dict['xmax']
 maxvel_color         = args_dict['cl']
 fit_function         = args_dict['fx']
 pixel_size           = args_dict['px']
-max_velocity         = args_dict['mv']
+max_velocity         = args_dict['maxd']
+min_velocity         = args_dict['minv']
+
+#Hard-coded parameters
+overlap_score_cutoff        = args_dict['oscore']
+log_area_score_cutoff       = args_dict['lascore']
+diff_log_area_score_cutoff  = args_dict['dlascore']
+
 
 #Force analysis string value - for the analysis file
 force_analysis_str = 'False'
@@ -361,6 +373,12 @@ for top_root in sorted_top_roots:
             new_motility.force_analysis = force_analysis
             new_motility.width          = frame_width
             new_motility.height         = frame_height
+            new_motility.min_velocity   = min_velocity
+
+            #Assign the hard-coded parameters
+            new_motility.overlap_score_cutoff       = overlap_score_cutoff
+            new_motility.log_area_score_cutoff      = log_area_score_cutoff
+            new_motility.diff_log_area_score_cutoff = diff_log_area_score_cutoff 
             
             #If links are already constructed read frame links and skip the next parts
             if not new_motility.read_frame_links():
@@ -438,7 +456,13 @@ for top_root in sorted_top_roots:
     combined_motility.num_frames   = number_of_frames
     combined_motility.dx           = 1.0*pixel_size
     combined_motility.max_velocity = 1.0*max_velocity/pixel_size
-    
+    combined_motility.min_velocity = min_velocity
+
+    #Assign the hard-coded parameters
+    combined_motility.overlap_score_cutoff       = overlap_score_cutoff
+    combined_motility.log_area_score_cutoff      = log_area_score_cutoff
+    combined_motility.diff_log_area_score_cutoff = diff_log_area_score_cutoff 
+
     #Total number of points
     total_num_points = len(combined_full_len_vel[:,0])
     
