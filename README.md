@@ -154,18 +154,18 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 - To run **lima**, on a set of movies processed by **fast**, first go to outputs directory where the results for the complete data set are stored. For example, if user is in ```examples/loaded_motility```, enter in terminal ```cd outputs``` to change directory to outputs.
 
 - To perform a loaded motility analysis for a **FOLDER** in ```outputs``` directory, enter in terminal,
-    ```lima -d FOLDER```
+    - ```lima -d FOLDER```
 - Analysis results will be stored in ```FOLDER/combined/lima```.
 
 - For the analysis of an example data set, check ```examples/loaded_motility```.
     - First, analyze the movies:
-        ```fast -r -d 032714```
+        - ```fast -r -d 032714```
     - Move to outputs folder:
-        ```cd outputs```
+        - ```cd outputs```
     - Process the only directory in **outputs**: 
-        ```lima -d 032714__pt_none__n_5__ymax_1500__p_5__fx_none```
+        - ```lima -d 032714__pt_none__n_5__ymax_1500__p_5__fx_none```
     - Check the analysis results under
-        ```032714__pt_none__n_5__ymax_1500__p_5__fx_none/combined/lima```. 
+        - ```032714__pt_none__n_5__ymax_1500__p_5__fx_none/combined/lima```. 
 
 - For different analysis options, enter ```lima -h```.
 
