@@ -1,16 +1,16 @@
-#FAST v1.0: Fast Automated Spud Trekker Manual#
+#FAST v1.0: Fast Automated Spud Trekker Manual
 
 Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2015. Ensemble force changes that result from human cardiac myosin mutations and a small molecule effector.***][1]
 
 [1]: http://www.cell.com/cell-reports/abstract/S2211-1247(15)00381-2
 
-**examples** folder containing all example movies can be downloaded from https://goo.gl/vKGYWL
+**examples** folder containing all example movies can be downloaded from https://goo.gl/87LyDG
 
 **Tural Aksel**
 
-**Last updated on 2016-01-21**
+**Last updated on 2016-03-26**
 
-##Installation on Mac OS X Yosemite##
+##Installation on Mac OS X
 
 - **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
     
@@ -51,7 +51,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
 
-###Installation instructions for generating tracking movies on Mac OSX###
+##Installation instructions for generating tracking movies on Mac OSX
 
 - To create filament tracking movies as a visual report for quality of filament tracking, two extra packages need to be installed.
 
@@ -67,7 +67,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
     sudo mv ffmpeg ffprobe ffserver /usr/local/bin
     ```
 
-##Preparation of movie files##
+##Preparation of movie files
 
 - **fast** only analyzes movie tif files recorded using  [micro-manager](https://www.micro-manager.org/). For movies, recorded using other software, first save the movie as tiff stacks and convert the stacks to micro-manager output format using **stack2tiffs**.
    
@@ -79,7 +79,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 - **FRAMERATE** is the frame rate of the movies in frame per second **(Default: 1)**. Process movies with different frame rates separately.
 - **SIZELOWERBOUND** is the lower bound for the size (Mbytes) of the tiff stacks to be converted into individual tiffs **(Default: 6)**. Only tiffstacks bigger in size than SIZELOWERBOUND are processed.
 
-##Analysis of movies using FAST##
+##Analysis of movies using FAST
 
 - Although not necessary, it is recommended to organize the movies to be analyzed in a hierarchical order.
    - LEVEL1 (e.g. date)
@@ -124,7 +124,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - Please check the examples in **examples/unloaded_motility** to get familiar with **stack2tiffs** and **fast**.
 
-##Result descriptions##
+##Result descriptions
 
 - **fast** plots velocities as png files and prints velocity data as text files. Complete list of unfiltered velocity points are saved with the extension ```*_full_length_velocity.txt```. Maximum path velocities, which are colored in the scatter plot, are saved with the extension ```*_max_length_velocity.txt```. The plots are saved with the extension ```*_length_velocity.png```. Combined results are saved in ```combined``` folder in ```outputs``` directory.   
 
@@ -139,7 +139,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - In addition, mean and standard error of mean (SEM) for the velocity parameters are stored in **MEAN_values.txt** and **SEM_values.txt** in **combined** folder.
 
-##Loaded in vitro motility analysis##
+##Loaded in vitro motility analysis
 
 - FAST is designed for high throughput analysis of loaded in vitro motility movies. For the experimental setup and the details of the loaded motility analysis please read through [our paper][1].
 
@@ -169,6 +169,6 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - For different analysis options, enter ```lima -h```.
 
-##FAQ##
+##FAQ
 
 - For questions and to report bugs, please contact me by turalaksel[at]gmail.com.
