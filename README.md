@@ -146,6 +146,6 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 - For different analysis options, enter ```lima -h```.
 
-##FAQ
+## FAQ
 
 - For questions and to report bugs, please contact me by turalaksel[at]gmail.com.
