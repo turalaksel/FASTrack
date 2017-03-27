@@ -25,7 +25,7 @@ from scipy.misc import imsave
 from scipy import stats
 
 from skimage import img_as_uint
-from skimage.filter import thresholding,rank,threshold_otsu
+from skimage.filter import thresholding,rank,threshold_otsu,gaussian_filter
 from skimage.morphology import disk, square, rectangle, skeletonize, dilation
 from skimage.morphology.watershed import watershed
 from skimage.io._plugins.freeimage_plugin import read_multipage
@@ -249,8 +249,8 @@ class Motility:
         self.frame2           = None  #Second frame
         self.frame_links      = []    #Container for the frame links
         
-        self.min_velocity     = 1     #Minimum velocity of the filament in pixels (Default:2)
-        self.max_velocity     = 25    #Maximum velocity of the filament in pixels (Default:15)
+        self.min_velocity     = 80    #Minimum average path velocity of the filament in nm/s (Default:80 nm/s)
+        self.max_velocity     = 25    #Maximum velocity of the filament in pixels/frame (Default:25)
         self.min_fil_length   = 0     #Minimum filament length
         self.max_fil_length   = 125   #Maximum filament length
         self.max_fil_width    = 25    #Maximum filament width
@@ -449,7 +449,7 @@ class Motility:
         if not os.path.isfile(self.directory+'/paths_2D.png'):
             return
 
-        #Filament size ratio
+        #filament size ratio
         ratio = self.width/1002.0
 
         for i in range(len(self.frame_links)):
@@ -462,7 +462,7 @@ class Motility:
                 new_frame.img_skeletons[link.filament1_contour[:,0],link.filament1_contour[:,1]] = True
         
             #Dilate skeletons for better visualization
-            new_frame.img_skeletons = dilation(new_frame.img_skeletons,selem=disk(6))
+            new_frame.img_skeletons = dilation(new_frame.img_skeletons,selem=disk(ratio*6))
             
             #Make 0 values 2 for transparency
             new_frame.img_skeletons = ma.masked_where(new_frame.img_skeletons == 0, new_frame.img_skeletons)
@@ -557,11 +557,12 @@ class Motility:
                 continue
             
             #Check if the filament has moved or not
-            mp_diff = path.links[-1].filament1_midpoint - path.links[0].filament2_midpoint
-            dist    = np.sqrt(np.sum(mp_diff**2))
+            mp_diff   = path.links[-1].filament1_midpoint - path.links[0].filament2_midpoint
+            time_diff = np.fabs(path.links[-1].filament1_time - path.links[0].filament2_time) 
+            dist      = np.sqrt(np.sum(mp_diff**2))
             
             #Determine whether a filament is stuck
-            if dist < len(path.links)*self.min_velocity:
+            if self.dx*dist/time_diff < len(path.links)*self.min_velocity:
                 path.stuck        = True
             
             #Determine filament length and velocities in nm and nm/s units
@@ -730,7 +731,6 @@ class Motility:
         '''
         Write path velocities and the image
         '''
-        
         #Filament size ratio
         ratio = self.width/1002.0
 
@@ -1049,7 +1049,7 @@ class Motility:
         cwd = os.getcwd()
         os.chdir(self.directory)
         
-        avicommand = "avconv -y -r 1 -i skeletons_%03d.png -r 1 filament_tracks.avi"
+        avicommand = "ffmpeg -y -r 1 -i skeletons_%03d.png -r 1 filament_tracks.avi"
         os.system(avicommand)
         
         #Copy the movie to output directory
@@ -1085,6 +1085,8 @@ class Motility:
         if not self.frame.read_frame(num_frame):
             sys.exit('File not found!')
         
+        self.frame.low_pass_filter()
+
         self.frame.entropy_clusters()
    
         self.frame.filter_islands()
@@ -1762,7 +1764,12 @@ class Frame:
             return 'good'
         else:
             return 'bad'
-        
+    
+    def low_pass_filter(self,sigma=2):
+        '''
+        Low pass filter to remove high-frequency noise
+        '''
+        self.img = gaussian_filter(self.img,sigma=sigma)
         
     def entropy_clusters(self):
         '''
