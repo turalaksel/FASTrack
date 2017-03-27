@@ -10,6 +10,40 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 **Last updated on 2016-03-26**
 
+## Installation on Ubuntu
+
+- **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
+    
+    ```
+    cd /usr/bin
+    sudo rm -f fast lima stack2tifs motility.py plotparams.py
+    ```
+
+- Install numpy, matplotlib, scipy, texlive, scikit-image. To install all the necessary packages, type the line below in the terminal.
+   
+     ```
+     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools ffmpeg python-skimage python-opencv
+     ```
+- To display fonts properly in FAST output, install MS fonts.
+  
+    ``` 
+    sudo apt-get install ttf-mscorefonts-installer
+    ```
+- After installing MD fonts, remove font cache file for matplotlib in your home directory.
+    
+    ```
+    rm -f ~/.cache/matplotlib/fontList.cache
+    ```
+
+- Move **FAST_linux** directory to the desired location. After you move the folder, on terminal change move to FAST_linux and run the installation script.     
+    
+    ```
+    chmod +x install.sh
+    
+    ./install.sh
+    ```
+- After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
+
 ## Installation on Mac OS X
 
 - **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
@@ -51,7 +85,7 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 - After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
 
-## Installation instructions for generating tracking movies on Mac OSX
+### Installation instructions for generating tracking movies on Mac OSX
 
 - To create filament tracking movies as a visual report for quality of filament tracking, two extra packages need to be installed.
 
