@@ -22,7 +22,7 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 - Install numpy, matplotlib, scipy, texlive, scikit-image. To install all the necessary packages, type the line below in the terminal.
    
      ```
-     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools ffmpeg python-skimage python-opencv
+     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools python-skimage python-opencv ffmpeg
      ```
 - To display fonts properly in FAST output, install MS fonts.
   
