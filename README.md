@@ -51,7 +51,7 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 - After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
 
-##Installation instructions for generating tracking movies on Mac OSX
+## Installation instructions for generating tracking movies on Mac OSX
 
 - To create filament tracking movies as a visual report for quality of filament tracking, two extra packages need to be installed.
 
