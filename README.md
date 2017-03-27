@@ -1,4 +1,4 @@
-#FAST v1.0: Fast Automated Spud Trekker Manual#
+# FAST v1.0: Fast Automated Spud Trekker Manual
 
 Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2015. Ensemble force changes that result from human cardiac myosin mutations and a small molecule effector.***][1]
 
@@ -8,9 +8,9 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 **Tural Aksel**
 
-**Last updated on 2016-01-21**
+**Last updated on 2016-03-26**
 
-##Installation on Ubuntu 15.10##
+## Installation on Ubuntu
 
 - **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
     
@@ -22,7 +22,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 - Install numpy, matplotlib, scipy, texlive, scikit-image. To install all the necessary packages, type the line below in the terminal.
    
      ```
-     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools python-skimage python-opencv
+     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools ffmpeg python-skimage python-opencv
      ```
 - To display fonts properly in FAST output, install MS fonts.
   
@@ -44,7 +44,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
     ```
 - After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
 
-##Preparation of movie files##
+## Preparation of movie files
 
 - **fast** only analyzes movie tif files recorded using  [micro-manager](https://www.micro-manager.org/). For movies, recorded using other software, first save the movie as tiff stacks and convert the stacks to micro-manager output format using **stack2tiffs**.
    
@@ -56,7 +56,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 - **FRAMERATE** is the frame rate of the movies in frame per second **(Default: 1)**. Process movies with different frame rates separately.
 - **SIZELOWERBOUND** is the lower bound for the size (Mbytes) of the tiff stacks to be converted into individual tiffs **(Default: 6)**. Only tiffstacks bigger in size than SIZELOWERBOUND are processed.
 
-##Analysis of movies using FAST##
+## Analysis of movies using FAST
 
 - Although not necessary, it is recommended to organize the movies to be analyzed in a hierarchical order.
    - LEVEL1 (e.g. date)
@@ -101,7 +101,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - Please check the examples in **examples/unloaded_motility** to get familiar with **stack2tiffs** and **fast**.
 
-##Result descriptions##
+## Result descriptions
 
 - **fast** plots velocities as png files and prints velocity data as text files. Complete list of unfiltered velocity points are saved with the extension ```*_full_length_velocity.txt```. Maximum path velocities, which are colored in the scatter plot, are saved with the extension ```*_max_length_velocity.txt```. The plots are saved with the extension ```*_length_velocity.png```. Combined results are saved in ```combined``` folder in ```outputs``` directory.   
 
@@ -116,7 +116,7 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 
 - In addition, mean and standard error of mean (SEM) for the velocity parameters are stored in **MEAN_values.txt** and **SEM_values.txt** in **combined** folder.
 
-##Loaded in vitro motility analysis##
+## Loaded in vitro motility analysis
 
 - FAST is designed for high throughput analysis of loaded in vitro motility movies. For the experimental setup and the details of the loaded motility analysis please read through [our paper][1].
 
@@ -131,21 +131,21 @@ Please cite [***Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2
 - To run **lima**, on a set of movies processed by **fast**, first go to outputs directory where the results for the complete data set are stored. For example, if user is in ```examples/loaded_motility```, enter in terminal ```cd outputs``` to change directory to outputs.
 
 - To perform a loaded motility analysis for a **FOLDER** in ```outputs``` directory, enter in terminal,
-    ```lima -d FOLDER```
+    - ```lima -d FOLDER```
 - Analysis results will be stored in ```FOLDER/combined/lima```.
 
 - For the analysis of an example data set, check ```examples/loaded_motility```.
     - First, analyze the movies:
-        ```fast -r -d 032714```
+        - ```fast -r -d 032714```
     - Move to outputs folder:
-        ```cd outputs```
+        - ```cd outputs```
     - Process the only directory in **outputs**: 
-        ```lima -d 032714__pt_none__n_5__ymax_1500__p_5__fx_none```
+        - ```lima -d 032714__pt_none__n_5__ymax_1500__p_5__fx_none```
     - Check the analysis results under
-        ```032714__pt_none__n_5__ymax_1500__p_5__fx_none/combined/lima```. 
+        - ```032714__pt_none__n_5__ymax_1500__p_5__fx_none/combined/lima```. 
 
 - For different analysis options, enter ```lima -h```.
 
-##FAQ##
+##FAQ
 
 - For questions and to report bugs, please contact me by turalaksel[at]gmail.com.
