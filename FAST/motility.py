@@ -1049,7 +1049,7 @@ class Motility:
         cwd = os.getcwd()
         os.chdir(self.directory)
         
-        avicommand = "ffmpeg -y -r 1 -i skeletons_%03d.png -r 1 filament_tracks.avi"
+        avicommand = "avconv -y -r 1 -i skeletons_%03d.png -r 1 filament_tracks.avi"
         os.system(avicommand)
         
         #Copy the movie to output directory
