@@ -562,7 +562,7 @@ class Motility:
             dist      = np.sqrt(np.sum(mp_diff**2))
             
             #Determine whether a filament is stuck
-            if self.dx*dist/time_diff < len(path.links)*self.min_velocity:
+            if self.dx*dist/time_diff < self.min_velocity:
                 path.stuck        = True
             
             #Determine filament length and velocities in nm and nm/s units
