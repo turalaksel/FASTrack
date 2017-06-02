@@ -1898,7 +1898,7 @@ class Island:
         self.xy_norm[1] = self.xy[1]-self.y_min
         
         #Get the reduced image
-        self.img_reduced               = np.zeros((self.x_dim+1,self.y_dim+1),dtype=np.uint16)
+        self.img_reduced               = np.zeros((self.x_dim+1,self.y_dim+1))
         self.img_reduced[self.xy_norm] = img[self.xy]
     
     def decompose_to_filaments(self):
