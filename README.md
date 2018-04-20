@@ -27,7 +27,7 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 - Inside virtualenvironment, install numpy, matplotlib, scipy, texlive, scikit-image, opencv, enum and futures.
     ```
-    pip install numpy matplotlib scipy imageio scikit-image opencv-python
+    pip install numpy==1.11.2 matplotlib scipy imageio scikit-image opencv-python enum34 futures
     pip install --upgrade pip enum34
     pip install futures
     ```
