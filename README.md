@@ -8,7 +8,7 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 **Tural Aksel**
 
-**Last updated on 2016-03-26**
+**Last updated on 2018-04-20**
 
 ## Installation on Ubuntu
 
@@ -17,6 +17,19 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
     ```
     cd /usr/bin
     sudo rm -f fast lima stack2tifs motility.py plotparams.py
+    ```
+
+- Create a virtual environment with python2.7
+
+    ```
+    mkvirtualenv -p python2.7 FAST
+    ```
+
+- Inside virtualenvironment, install numpy, matplotlib, scipy, texlive, scikit-image, opencv, enum and futures.
+    ```
+    pip install numpy==1.11.2 matplotlib scipy imageio scikit-image opencv-python enum34 futures
+    pip install --upgrade pip enum34
+    pip install futures
     ```
 
 - Install numpy, matplotlib, scipy, texlive, scikit-image. To install all the necessary packages, type the line below in the terminal.
