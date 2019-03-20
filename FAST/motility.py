@@ -16,7 +16,7 @@ import matplotlib.pyplot as py
 import matplotlib.cm as cm
 import scipy.io
 
-import plotparams as plotparams
+import FAST.plotparams as plotparams
 
 from numpy import ma
 from scipy.ndimage import label
@@ -25,10 +25,11 @@ from scipy.misc import imsave
 from scipy import stats
 
 from skimage import img_as_uint
-from skimage.filter import thresholding,rank,threshold_otsu,gaussian_filter
+from skimage.filters import thresholding,rank,threshold_otsu
+from skimage.filters import gaussian as gaussian_filter
 from skimage.morphology import disk, square, rectangle, skeletonize, dilation
 from skimage.morphology.watershed import watershed
-from skimage.io._plugins.freeimage_plugin import read_multipage
+from skimage.external.tifffile import imread as read_multipage
 
 from scipy.optimize import leastsq
 from scipy.stats    import kde
@@ -434,7 +435,8 @@ class Motility:
                 self.frame_links      = np.load(self.directory+'/links.npy')
             #If links.npy is the output of an old version of motility
             except ImportError:
-                print'Movie analysed previously with an old version of motility. Links will be regenerated.'
+                print('Movie analysed previously with an old version of'
+                        ' motility. Links will be regenerated.')
                 return False
             return True
         else:
@@ -629,7 +631,7 @@ class Motility:
         self.frame2.reset_filament_labels()
         
         #Time difference between frame1 and frame2
-        if self.elapsed_times != None:
+        if self.elapsed_times.any() != None:
             self.dt      = self.elapsed_times[self.frame2.frame_no] - self.elapsed_times[self.frame1.frame_no]
             frame1_time  = self.elapsed_times[self.frame1.frame_no]
             frame2_time  = self.elapsed_times[self.frame2.frame_no]
@@ -1067,7 +1069,7 @@ class Motility:
         '''
         #Read the frame
         
-        print 'Reading frame: %d'%(num_frame)
+        print('Reading frame: %d'%(num_frame))
         self.frame           = Frame()
         self.frame.directory = self.directory
         self.frame.header    = self.header
@@ -1227,7 +1229,7 @@ class Motility:
         
         if num_points_filtered < min_points:
             #There is no frame-link
-            print 'Warning: There is not enough velocity data! - %d points'%(num_points_t)
+            print('Warning: There is not enough velocity data! - %d points'%(num_points_t))
             return -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
         
         #Statistics data
