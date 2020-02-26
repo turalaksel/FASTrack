@@ -10,7 +10,7 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 ## Dependencies
 
-TO generate movies of tracking, install avconv package. 
+To generate movies of tracking, install avconv package. 
 
 On Mac OS, install using brew: `brew install libav`. On Ubuntu, `sudo apt-get install ffmpeg`.
 
