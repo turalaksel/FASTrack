@@ -23,7 +23,7 @@ setuptools.setup(
                       'decorator==4.3.0',
                       'enum34==1.1.6',
                       'futures==3.2.0',
-                      ',imageio==2.3.0',
+                      'imageio==2.3.0',
                       'kiwisolver==1.0.1',
                       'matplotlib==2.2.2',
                       'networkx==2.1',
