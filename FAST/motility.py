@@ -2,7 +2,9 @@
 
 #Invitro-motility (Actin sliding via myosins) analysis python module
 #Tural Aksel
-#05/30/13
+
+import matplotlib
+matplotlib.use('TkAgg')
 
 import os
 import sys
