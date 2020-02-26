@@ -19,7 +19,7 @@ On Mac OS, install using brew: `brew install libav`. On Ubuntu, `sudo apt-get in
 
 Before you install this package, remove previous installations and make sure to delete any lines with `FAST` in `.bashrc`, '`.profile` or `.bash_profile` files in your home directory (`~`).  
 
-Installing this package inside python virtual environment is high encouraged. After installing `virtualenv` and `virtualenvwrapper`, create a python2 virtual environnment.
+Installing this package inside python virtual environment is highly encouraged. After installing `virtualenv` and `virtualenvwrapper`, create a python2 virtual environnment.
 
 Create a virtual environment with python2.7.
 
@@ -33,6 +33,8 @@ For most up to date version of the package, clone or download. Inside the `cryoo
 
 `$(FAST) pip install .` 
 
+Everytime you need to use `FAST`, remeber to activate `FAST` virtual environment typing `workon FAST` on terminal.
+
 To display fonts properly om Ubuntu, install MS fonts.
   
 `$sudo apt-get install ttf-mscorefonts-installer`
@@ -40,8 +42,6 @@ To display fonts properly om Ubuntu, install MS fonts.
 On Ubuntu, after installing MD fonts, remove font cache file for matplotlib in your home directory.
     
 `$rm -f ~/.cache/matplotlib/fontList.cache`
-
-On terminal change directory to FAST and inside run the installation script.     
 
 After installation don't move the FAST directory to some other location.
 
