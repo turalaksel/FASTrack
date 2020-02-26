@@ -8,7 +8,16 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 &copy; 2020 Tural Aksel
 
+## Dependencies
+
+TO generate movies of tracking, install avconv package. 
+
+On Mac OS, install using brew: `brew install libav`. On Ubuntu, `sudo apt-get install ffmpeg`.
+
+
 ## Installation
+
+Before you install this package, remove previous installations and make sure to delete any lines with `FAST` in `.bashrc`, '`.profile` or `.bash_profile` files in your home directory (`~`).  
 
 Installing this package inside python virtual environment is high encouraged. After installing `virtualenv` and `virtualenvwrapper`, create a python2 virtual environnment.
 
@@ -23,8 +32,6 @@ Remember to activate the virtualenvironment
 For most up to date version of the package, clone or download. Inside the `cryoorigami` package folder, execute
 
 `$(FAST) pip install .` 
-
-If you would like to run the scripts in any path, make sure to add the `bin` folder in `$PATH` variable in your `.bash_profile` or `.bashrc` file.
 
 To display fonts properly om Ubuntu, install MS fonts.
   
