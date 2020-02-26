@@ -29,7 +29,11 @@ Remember to activate the virtualenvironment
 
 `$workon FAST`
 
-For most up to date version of the package, clone or download. Inside the `cryoorigami` package folder, execute
+Install using pip
+
+`$(FAST) pip install fast`
+
+For most up to date version of the package, clone or download FAST. Inside the `FAST` package folder, execute
 
 `$(FAST) pip install .` 
 
