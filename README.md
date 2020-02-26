@@ -6,56 +6,37 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 **examples** folder containing all example movies can be downloaded from https://goo.gl/87LyDG
 
-**Tural Aksel**
+&copy; 2020 Tural Aksel
 
-**Last updated on 2018-04-20**
+## Installation
 
-## Installation on Ubuntu
+Installing this package inside python virtual environment is high encouraged. After installing `virtualenv` and `virtualenvwrapper`, create a python2 virtual environnment.
 
-- **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
-    
-    ```
-    cd /usr/bin
-    sudo rm -f fast lima stack2tifs motility.py plotparams.py
-    ```
+Create a virtual environment with python2.7.
 
-- Create a virtual environment with python2.7
+`$mkvirtualenv FAST -p python2.7$`
 
-    ```
-    mkvirtualenv -p python2.7 FAST
-    ```
+Remember to activate the virtualenvironment
 
-- Inside virtualenvironment, install numpy, matplotlib, scipy, texlive, scikit-image, opencv, enum and futures.
-    ```
-    pip install numpy==1.11.2 matplotlib scipy imageio scikit-image opencv-python enum34 futures
-    pip install --upgrade pip enum34
-    pip install futures
-    ```
+`$workon FAST`
 
-- Install numpy, matplotlib, scipy, texlive, scikit-image. To install all the necessary packages, type the line below in the terminal.
-   
-     ```
-     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools python-skimage python-opencv ffmpeg
-     ```
-- To display fonts properly in FAST output, install MS fonts.
+For most up to date version of the package, clone or download. Inside the `cryoorigami` package folder, execute
+
+`$(FAST) pip install .` 
+
+If you would like to run the scripts in any path, make sure to add the `bin` folder in `$PATH` variable in your `.bash_profile` or `.bashrc` file.
+
+To display fonts properly om Ubuntu, install MS fonts.
   
-    ``` 
-    sudo apt-get install ttf-mscorefonts-installer
-    ```
-- After installing MD fonts, remove font cache file for matplotlib in your home directory.
-    
-    ```
-    rm -f ~/.cache/matplotlib/fontList.cache
-    ```
+`$sudo apt-get install ttf-mscorefonts-installer`
 
-- Move **FAST_linux** directory to the desired location. After you move the folder, on terminal change move to FAST_linux and run the installation script.     
+On Ubuntu, after installing MD fonts, remove font cache file for matplotlib in your home directory.
     
-    ```
-    chmod +x install.sh
-    
-    ./install.sh
-    ```
-- After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
+`$rm -f ~/.cache/matplotlib/fontList.cache`
+
+On terminal change directory to FAST and inside run the installation script.     
+
+After installation don't move the FAST directory to some other location.
 
 ## Preparation of movie files
 

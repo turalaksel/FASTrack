@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="FAST1.0", # Replace with your own username
+    name="FAST", # Replace with your own username
     version="1.0.0",
     author="Tural Aksel",
     author_email="turalaksel@gmail.com",
@@ -18,6 +18,10 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    scripts=['bin/fast',
+             'bin/lima',
+             'bin/ppss',
+             'bin/stack2tifs'],
     install_requires=['backports.functools-lru-cache==1.5',
                       'cycler==0.10.0',
                       'decorator==4.3.0',
