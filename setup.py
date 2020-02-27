@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="FASTrack", # Replace with your own username
-    version="1.0.0",
+    name="FASTrack",# Replace with your own username
+    version="1.0.1",
     author="Tural Aksel",
     author_email="turalaksel@gmail.com",
     description="Automated filament tracker for in-vitro motility actin gliding assays",
