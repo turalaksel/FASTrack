@@ -29,7 +29,11 @@ Remember to activate the virtualenvironment
 
 `$workon FAST`
 
-For most up to date version of the package, clone or download FAST. Inside the `FAST` package folder, execute
+To install the FAST package, type and execcute
+
+`$(FAST) pip install FASTrack` 
+
+For most up to date version of the package, clone or download FAST github repository. Inside the `FAST` package folder, execute
 
 `$(FAST) pip install .` 
 
