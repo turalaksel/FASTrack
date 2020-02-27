@@ -1,4 +1,4 @@
-# FAST v1.0: Fast Automated Spud Trekker Manual
+# FAST v1.0.0: Fast Automated Spud Tracker
 
 Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2015. Ensemble force changes that result from human cardiac myosin mutations and a small molecule effector.**][1]
 
