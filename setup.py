@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="FASTrack",# Replace with your own username
-    version="1.0.1",
+    version="1.0.2",
     author="Tural Aksel",
     author_email="turalaksel@gmail.com",
     description="Automated filament tracker for in-vitro motility actin gliding assays",

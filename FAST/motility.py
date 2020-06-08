@@ -17,6 +17,7 @@ import numpy
 import matplotlib.pyplot as py
 import matplotlib.cm as cm
 import scipy.io
+import skimage.io as skio
 
 import plotparams as plotparams
 
@@ -29,7 +30,6 @@ from skimage import img_as_uint
 from skimage.filters import thresholding,rank,threshold_otsu,gaussian_filter
 from skimage.morphology import disk, square, rectangle, skeletonize, dilation
 from skimage.morphology.watershed import watershed
-from skimage.io import imread_collection
 
 from imageio import imwrite
 
@@ -54,7 +54,7 @@ def make_N_colors(cmap_name, N):
     cmap = cm.get_cmap(cmap_name, N) 
     return cmap(np.arange(N))
 
-def stack_to_tiffs(fname,frame_rate=1.0):
+def stack_to_tiffs(fname, frame_rate=1.0):
     '''
     Read and convert tiff stack file to individual files
     '''
@@ -69,7 +69,7 @@ def stack_to_tiffs(fname,frame_rate=1.0):
         os.mkdir(new_dir)
     
     #Read all the frames
-    tiff_frames  = imread_collection(fname)
+    tiff_frames  = skio.imread(fname)
     num_frames   = len(tiff_frames)
     
     f = open(new_dir+'/metadata.txt','w')

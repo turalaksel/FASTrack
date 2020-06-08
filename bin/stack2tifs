@@ -30,7 +30,6 @@ args = parser.parse_args()
 args_dict = vars(args)
 parser.print_help()
 
-
 #Get the argument
 main_dir   = args_dict['d']
 min_size   = args_dict['s']
@@ -44,7 +43,6 @@ if main_dir == None or not os.path.isdir(main_dir):
 Recurse through each data directory
 '''
 for root, subFolders, files in os.walk(main_dir):
-    if len(subFolders) == 0:
-        tif_files = filter(lambda f: os.path.getsize(root+'/'+f)*1E-6 > min_size and os.path.splitext(f)[1] == '.tif', files)
-        for tif_file in tif_files:
-            motility.stack_to_tiffs(root+'/'+tif_file,frame_rate)
+    tif_files = filter(lambda f: os.path.getsize(root+'/'+f)*1E-6 > min_size and os.path.splitext(f)[1] == '.tif', files)
+    for tif_file in tif_files:
+        motility.stack_to_tiffs(root+'/'+tif_file, frame_rate)
