@@ -33,7 +33,7 @@ setuptools.setup(
                       'networkx==2.1',
                       'numpy==1.11.2',
                       'opencv-python==3.4.0.12',
-                      'Pillow==5.1.0',
+                      'pillow>=6.2.2',
                       'pyparsing==2.2.0',
                       'python-dateutil==2.7.2',
                       'pytz==2018.4',
