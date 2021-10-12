@@ -32,7 +32,7 @@ setuptools.setup(
                       'matplotlib==2.2.2',
                       'networkx==2.1',
                       'numpy==1.11.2',
-                      'opencv-python==3.4.0.12',
+                      'opencv-python==3.4.7.28',
                       'pillow>=6.2.2',
                       'pyparsing==2.2.0',
                       'python-dateutil==2.7.2',
