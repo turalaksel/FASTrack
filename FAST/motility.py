@@ -19,7 +19,7 @@ import matplotlib.cm as cm
 import scipy.io
 import skimage.io as skio
 
-import plotparams as plotparams
+import FAST.plotparams as plotparams
 
 from numpy import ma
 from scipy.ndimage import label
@@ -437,7 +437,8 @@ class Motility:
                 self.frame_links      = np.load(self.directory+'/links.npy')
             #If links.npy is the output of an old version of motility
             except ImportError:
-                print'Movie analysed previously with an old version of motility. Links will be regenerated.'
+                print('Movie analysed previously with an old version of'
+                        ' motility. Links will be regenerated.')
                 return False
             return True
         else:
@@ -1070,7 +1071,7 @@ class Motility:
         '''
         #Read the frame
         
-        print 'Reading frame: %d'%(num_frame)
+        print('Reading frame: %d'%(num_frame))
         self.frame           = Frame()
         self.frame.directory = self.directory
         self.frame.header    = self.header
@@ -1230,7 +1231,7 @@ class Motility:
         
         if num_points_filtered < min_points:
             #There is no frame-link
-            print 'Warning: There is not enough velocity data! - %d points'%(num_points_t)
+            print('Warning: There is not enough velocity data! - %d points'%(num_points_t))
             return -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
         
         #Statistics data

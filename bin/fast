@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
-import commands
+import subprocess32 as subprocess
 import time
 import numpy as np
 import argparse
@@ -17,6 +17,12 @@ def is_number(s):
         return True
     except ValueError:
         return False
+
+def commands_getstatusoutput(cmd):
+    p = subprocess.run( cmd.split(' '), stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+            , universal_newlines=True)
+    return p.returncode, str(p.stdout) + str(p.stderr)
 
 #Suppress all the warnings
 warnings.filterwarnings("ignore")
@@ -64,7 +70,7 @@ parser.print_help()
 
 #Get username
 user_name = getpass.getuser()
-print '-'*10+'Welcome %s'%(user_name)+'-'*10
+print('-'*10+'Welcome %s'%(user_name)+'-'*10)
 
 #Get the argument
 main_dir             = args_dict['d']
@@ -122,7 +128,7 @@ for root, subFolders, files in os.walk(main_dir):
     if len(subFolders) == 0:
         #Prepare the python script to read frames
         
-        tif_files    = filter(lambda x:x[-4:] == '.tif',files)
+        tif_files = list(filter(lambda x:x[-4:] == '.tif',files))
         if len(tif_files) == 0:
             continue
         
@@ -155,7 +161,7 @@ for root, subFolders, files in os.walk(main_dir):
         #Prepare the input file for ppss
         input_file = root+'.in'
         f          = open(input_file,'w')
-        files      = filter(lambda x:os.path.splitext(x)[1] == '.tif',os.listdir(root))
+        files      = list(filter(lambda x:os.path.splitext(x)[1] == '.tif',os.listdir(root)))
 
         #Write the frame numbers
         frame_nos  = sorted([int(os.path.basename(x).split('_')[1]) for x in files])
@@ -168,13 +174,13 @@ The analysis starts here
 '''
 
 if not os.path.isdir('outputs'):
-    os.mkdir('outputs')
+    os.makedirs('outputs')
 
 if not os.path.isdir('outputs/'+main_out_dir):
-    os.mkdir('outputs/'+main_out_dir)
+    os.makedirs('outputs/'+main_out_dir)
 
 if not os.path.isdir('outputs/'+main_out_dir+'/combined'):
-    os.mkdir('outputs/'+main_out_dir+'/combined')
+    os.makedirs('outputs/'+main_out_dir+'/combined')
 
 #Output file for parameter averages
 out_MEAN_fname  = os.path.abspath('outputs/'+main_out_dir+'/combined/MEAN_values.txt')
@@ -204,11 +210,13 @@ for root, subFolders, files in os.walk(main_dir):
     top_directory      = split_path_entries[0]
     
     #Check for either *.tif or *.npy files for folders to be processed 
-    if len(subFolders) == 0 and (len(filter(lambda x:x[-4:] == '.tif',files)) > 0 or len(filter(lambda x:x[:6] == 'filXYs',files)) > 0):
+    if len(subFolders) == 0 \
+        and (len(list(filter(lambda x:x[-4:] == '.tif',files))) > 0 \
+        or len(list(filter(lambda x:x[:6] == 'filXYs',files))) > 0):
         entries = root.split('/')
         top_folder = '/'.join(entries[:-1])
         exp_num    = entries[-1]
-        if not process_folders.has_key(top_folder):
+        if top_folder not in process_folders:
             process_folders[top_folder] = []
         process_folders[top_folder].append(exp_num)
 
@@ -322,7 +330,7 @@ for top_root in sorted_top_roots:
         
         #If the picture quality is bad, return early
         if picture_quality == 'bad':
-            print 'Bad picture quality in %s'%(root)
+            print('Bad picture quality in %s'%(root))
             continue
         
         #Output filenames
@@ -336,24 +344,24 @@ for top_root in sorted_top_roots:
         input_file   = final_folder+'.in'
         script_file  = final_folder+'.py'
         
-        print 'Processing tif files in %s'%(root)
+        print('Processing tif files in %s'%(root))
         
         #Start the timer
         start_t      = time.time()
         
         #If ppss directory exists remove it recursively before starting
         if os.path.exists('ppss_dir'):
-            out      = commands.getstatusoutput("rm -rf ppss_dir")
+            out = commands_getstatusoutput("rm -rf ppss_dir")
             
         #Parallel-execution of filament extraction of all the frames
-        out          = commands.getstatusoutput("ppss -f "+input_file+" -c 'python "+script_file+" '")
+        out = commands_getstatusoutput("ppss -f "+input_file+" -c 'python "+script_file+" '")
         
         #Check ppss installation
         if len(out) == 2 and 'ppss: not found' in out[1]:
             sys.exit("PPSS is not installed. Please install PPSS to use FAST.")
             
         #Delete ppss output directory
-        out          = commands.getstatusoutput("rm -rf ppss_dir")
+        out = commands_getstatusoutput("rm -rf ppss_dir")
         
         #Go through all the saved npy files - make the frame links
         f         = open(input_file,'r')
@@ -386,7 +394,7 @@ for top_root in sorted_top_roots:
                 new_motility.read_metadata()
                 
                 for no in frame_nos[1:]:
-                    print 'Making the links: Frame: %d'%(no)
+                    print('Making the links: Frame: %d'%(no))
                     new_motility.load_frame2(no)
                     new_motility.make_frame_links()
                     new_motility.frame1 = new_motility.frame2
@@ -431,7 +439,7 @@ for top_root in sorted_top_roots:
             all_data_counter += 1
             
         end_t = time.time()
-        print "Time spent: %.1f"%(end_t-start_t)
+        print("Time spent: %.1f"%(end_t-start_t))
     
     
     #Go back to main directory
@@ -442,7 +450,7 @@ for top_root in sorted_top_roots:
         continue
     
     #Prompt which files are combined
-    print "Combining data in %s"%(root_header)
+    print("Combining data in %s"%(root_header))
     
     #Process and write down the combined results 
     combined_full_len_vel = np.vstack(combined_full_len_vel)
