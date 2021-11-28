@@ -2,7 +2,10 @@
 
 #Plotting parameters
 #Tural Aksel
-#09/02/13
+
+import matplotlib
+matplotlib.use('TkAgg')
+
 import matplotlib.pyplot as py
 import matplotlib.cm as cm
 import numpy as np

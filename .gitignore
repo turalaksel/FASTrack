@@ -1,2 +1,8 @@
-
+.DS_Store
 *.pyc
+*.whl
+*.gz
+*.tar.gz
+dist/
+build/
+*egg-info/

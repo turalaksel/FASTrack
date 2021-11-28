@@ -1,4 +1,4 @@
-# FAST v1.0: Fast Automated Spud Trekker Manual
+# FAST v1.0.1: Fast Automated Spud Tracker
 
 Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 2015. Ensemble force changes that result from human cardiac myosin mutations and a small molecule effector.**][1]
 
@@ -6,43 +6,48 @@ Please cite [**Aksel T, Yu EC, Sutton S, Ruppel KM, Spudich JA. Cell Reports. 20
 
 **examples** folder containing all example movies can be downloaded from https://goo.gl/87LyDG
 
-**Tural Aksel**
+&copy; 2020 Tural Aksel
 
-**Last updated on 2016-03-26**
+## Dependencies
 
-## Installation on Ubuntu
+To generate movies of tracking, install avconv package. 
 
-- **IMPORTANT: If you previously installed fast following the old instructions, before proceeding delete the FAST codes on your system typing the lines below.** 
-    
-    ```
-    cd /usr/bin
-    sudo rm -f fast lima stack2tifs motility.py plotparams.py
-    ```
+On Mac OS, install using brew: `brew install libav`. On Ubuntu, `sudo apt-get install ffmpeg`.
 
-- Install numpy, matplotlib, scipy, texlive, scikit-image. To install all the necessary packages, type the line below in the terminal.
-   
-     ```
-     sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose texlive libav-tools python-skimage python-opencv ffmpeg
-     ```
-- To display fonts properly in FAST output, install MS fonts.
+
+## Installation
+
+Before you install this package, remove previous installations and make sure to delete any lines with `FAST` in `.bashrc`, '`.profile` or `.bash_profile` files in your home directory (`~`).  
+
+Installing this package inside python virtual environment is highly encouraged. After installing `virtualenv` and `virtualenvwrapper`, create a python2 virtual environnment.
+
+Create a virtual environment with python2.7.
+
+`$mkvirtualenv FAST -p python2.7$`
+
+Remember to activate the virtualenvironment
+
+`$workon FAST`
+
+To install the FAST package, type and execcute
+
+`$(FAST) pip install FASTrack` 
+
+For most up to date version of the package, clone or download FAST github repository. Inside the `FAST` package folder, execute
+
+`$(FAST) pip install .` 
+
+Everytime you need to use `FAST`, remeber to activate `FAST` virtual environment typing `workon FAST` on terminal.
+
+To display fonts properly om Ubuntu, install MS fonts.
   
-    ``` 
-    sudo apt-get install ttf-mscorefonts-installer
-    ```
-- After installing MD fonts, remove font cache file for matplotlib in your home directory.
-    
-    ```
-    rm -f ~/.cache/matplotlib/fontList.cache
-    ```
+`$sudo apt-get install ttf-mscorefonts-installer`
 
-- Move **FAST_linux** directory to the desired location. After you move the folder, on terminal change move to FAST_linux and run the installation script.     
+On Ubuntu, after installing MD fonts, remove font cache file for matplotlib in your home directory.
     
-    ```
-    chmod +x install.sh
-    
-    ./install.sh
-    ```
-- After running the script don't move your FAST directory to some other location. If you move to another location, run the install.sh script in the new directory.
+`$rm -f ~/.cache/matplotlib/fontList.cache`
+
+After installation don't move the FAST directory to some other location.
 
 ## Preparation of movie files
 
