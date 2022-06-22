@@ -31,7 +31,7 @@ setuptools.setup(
                       'kiwisolver==1.0.1',
                       'matplotlib==2.2.2',
                       'networkx==2.1',
-                      'numpy==1.11.2',
+                      'numpy==1.22.0',
                       'opencv-python==3.4.0.12',
                       'pillow>=6.2.2',
                       'pyparsing==2.2.0',
